@@ -1,0 +1,26 @@
+{
+  "name": "template-ts-jest-kata",
+  "version": "1.0.0",
+  "description": "Template TypeScript for kata with jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "lint": "eslint . --ext .ts"
+  },
+  "keywords": [],
+  "devDependencies": {
+    "@types/jest": "^29.1.2",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.1.2",
+    "prettier": "^2.7.1",
+    "ts-jest": "^29.0.3",
+    "typescript": "^4.8.4"
+  },
+  "author": "Joann JOUSSELIN",
+  "license": "MIT"
+}
