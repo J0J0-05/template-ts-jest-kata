@@ -1,10 +1,10 @@
-# template-ts-jest-kata
+# Template for TypeScript kata with Jest
 
 Basic template to make a kata using [TypeScript](https://www.typescriptlang.org/) and [Jest](https://jestjs.io/).
 
-### Use
-- Install packages : `npm install`
-- Run tests : `npm run test` or `jest`
+### Getting started
+- Install dependencies : `npm install`
+- Run tests : `jest`
 - Run tests continuously : `jest --watch`
 - Code coverage by tests : `jest --coverage`
 
