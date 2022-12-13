@@ -1,5 +1,5 @@
 class Game {
-	totalScore : number[] = [];
+	totalScore: number[] = [];
 
 	roll(pinsDown: number): void {
 		this.totalScore.push(pinsDown);
@@ -8,12 +8,17 @@ class Game {
 	score(): number {
 		let frameIndex = 0;
 		let result = 0;
-		for(let i = 0;i<10;i++){
-			if(this.totalScore[frameIndex] + this.totalScore[frameIndex+1] == 10){
-
+		for (let frame = 0; frame < 10; frame++) {
+			if (this.totalScore[frameIndex] == 10) {
+				result += 10 + this.totalScore[frameIndex + 2];
+			} else if (this.totalScore[frameIndex] + this.totalScore[frameIndex + 1] == 10) {
+				result += 10 + this.totalScore[frameIndex + 2];
+			} else {
+				result += this.totalScore[frameIndex] + this.totalScore[frameIndex + 1];
 			}
+			frameIndex += 2;
 		}
-		return this.totalScore;
+		return result;
 	}
 }
 
@@ -42,8 +47,21 @@ describe('Kata Bowling', () => {
 		game.roll(7);
 
 		game.roll(2);
+
 		rolls(game, 0, 17);
 
 		expect(game.score()).toBe(7 + 3 + 2 + 2);
+	});
+
+	it('Strike case', () => {
+		const game = new Game();
+		game.roll(10);
+
+		game.roll(2);
+		game.roll(3);
+
+		rolls(game, 0, 16);
+
+		expect(game.score()).toBe(10 + 2 + 3 + 2 + 3);
 	});
 });
