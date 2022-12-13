@@ -9,26 +9,50 @@ class Game {
 		let frameIndex = 0;
 		let result = 0;
 		for (let frame = 0; frame < 10; frame++) {
-			if (this.isStrike(frameIndex)) { 
-				result += 10 + this.totalScore[frameIndex + 1] + this.totalScore[frameIndex + 2];
-				frameIndex += 1;
-			} else if (this.isSpare(frameIndex)) {
-				result += 10 + this.totalScore[frameIndex + 2];
-				frameIndex += 2;
-			} else {
-				result += this.totalScore[frameIndex] + this.totalScore[frameIndex + 1];
-				frameIndex += 2;
-			}
-			
+			result += this.getScore(frameIndex);
+			frameIndex += this.frameIndex(frameIndex);
 		}
+
 		return result;
 	}
 
-	private isSpare(frameIndex: number) {
+	private getScore(frameIndex: number): number {
+		if (this.isStrike(frameIndex)) {
+			return 10 + this.strikeBonus(frameIndex);
+		}
+
+		if (this.isSpare(frameIndex)) {
+			return 10 + this.spareBonus(frameIndex);
+		}
+
+		return this.standardScore(frameIndex);
+	}
+
+	private frameIndex(frameIndex: number): number {
+		if (this.isStrike(frameIndex)) {
+			return 1;
+		} else {
+			return 2;
+		}
+	}
+
+	private standardScore(frameIndex: number): number {
+		return this.totalScore[frameIndex] + this.totalScore[frameIndex + 1];
+	}
+
+	private spareBonus(frameIndex: number): number {
+		return this.totalScore[frameIndex + 2];
+	}
+
+	private strikeBonus(frameIndex: number): number {
+		return this.totalScore[frameIndex + 1] + this.totalScore[frameIndex + 2];
+	}
+
+	private isSpare(frameIndex: number): boolean {
 		return this.totalScore[frameIndex] + this.totalScore[frameIndex + 1] == 10;
 	}
 
-	private isStrike(frameIndex: number) {
+	private isStrike(frameIndex: number): boolean {
 		return this.totalScore[frameIndex] == 10;
 	}
 }
@@ -78,7 +102,7 @@ describe('Kata Bowling', () => {
 
 	it('Perfect game', () => {
 		const game = new Game();
-		
+
 		rolls(game, 10, 12);
 
 		expect(game.score()).toBe(300);
