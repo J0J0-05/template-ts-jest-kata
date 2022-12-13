@@ -4,7 +4,7 @@
   "description": "Template TypeScript for kata with jest",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watch",
     "build": "tsc",
     "lint": "eslint . --ext .ts"
   },
